@@ -26,15 +26,10 @@ RUN apt-get update  && apt-get install -y \
 # See: https://stackoverflow.com/questions/43333207/python-error-while-loading-shared-libraries-libpython3-4m-so-1-0-cannot-open
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
-
-# FROM base as xclip
-# RUN apt install -y xclip
-
-FROM base as requirements-of-astro
-# What is astro? See this link;
 # https://astronvim.github.io/ 
-
+FROM base as requirements-of-astro
 # Installing the requirements of AstroNvim
+# See: https://astronvim.github.io/#-requirements
 RUN wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip && \
     unzip Hack.zip && rm -rf Hack.zip && \
     npm install tree-sitter-cli && \
