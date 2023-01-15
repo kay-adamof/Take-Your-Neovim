@@ -50,6 +50,7 @@ RUN wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.z
     dpkg -i bottom_0.7.1_amd64.deb && \
     rm -rf /var/lib/apt/lists/*
 
+# About 140sec is needed to build this image in the case of my machine.
 FROM requirements-of-astro as astro
-RUN git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+RUN git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim && nvim --headless -c 'autocmd User PackerComplete quitall'
 
