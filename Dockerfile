@@ -35,8 +35,7 @@ WORKDIR /root/
 RUN apt-get update  && apt-get install -y \
     wget \
     curl \
-    git \
-    unzip && \
+    git && \
     wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb && \
     apt-get install ./nvim-linux64.deb && \
     rm -rf /var/lib/apt/lists/*
@@ -48,7 +47,8 @@ ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 FROM base as requirements-of-astro
 # Installing the requirements of AstroNvim
 # See: https://astronvim.github.io/#-requirements
-RUN wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip && \
+RUN apt-get install -y unzip && \
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip && \
     unzip Hack.zip && rm -rf Hack.zip && \
     npm install tree-sitter-cli && \
     wget https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb && \
