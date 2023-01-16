@@ -20,7 +20,7 @@ FROM node:18.3.0-slim as node
 FROM python:3.10.9-slim AS python
 
 # Using ubuntu as base image
-FROM ubuntu:focal-20220531 as base
+FROM bare-Neovim as Neovim
 # Copy minimal runtime needed
 COPY --from=node /usr/local/include/ /usr/local/include/
 COPY --from=node /usr/local/lib/ /usr/local/lib/
@@ -28,23 +28,13 @@ COPY --from=node /usr/local/bin/ /usr/local/bin/
 COPY --from=python /usr/local/include/ /usr/local/include/
 COPY --from=python /usr/local/lib/ /usr/local/lib/
 COPY --from=python /usr/local/bin/ /usr/local/bin/
-
 WORKDIR /root/
-
-# Installing Neovim and its related dependencies
-RUN apt-get update  && apt-get install -y \
-    wget \
-    curl \
-    git && \
-    wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb && \
-    apt-get install ./nvim-linux64.deb && \
-    rm -rf /var/lib/apt/lists/*
 # To activate python
 # See: https://stackoverflow.com/questions/43333207/python-error-while-loading-shared-libraries-libpython3-4m-so-1-0-cannot-open
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
 # https://astronvim.github.io/ 
-FROM base as requirements-of-astro
+FROM Neovim as requirements-of-astro
 # Installing the requirements of AstroNvim
 # See: https://astronvim.github.io/#-requirements
 RUN apt-get install -y unzip && \
