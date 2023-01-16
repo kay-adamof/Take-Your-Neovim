@@ -20,7 +20,7 @@ FROM node:18.3.0-slim as node
 FROM python:3.10.9-slim AS python
 
 # Using ubuntu as base image
-FROM bare-Neovim as Neovim
+FROM bare-neovim as neovim
 # Copy minimal runtime needed
 COPY --from=node /usr/local/include/ /usr/local/include/
 COPY --from=node /usr/local/lib/ /usr/local/lib/
@@ -34,7 +34,7 @@ WORKDIR /root/
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
 # https://astronvim.github.io/ 
-FROM Neovim as requirements-of-astro
+FROM neovim as requirements-of-astro
 # Installing the requirements of AstroNvim
 # See: https://astronvim.github.io/#-requirements
 RUN apt-get install -y unzip && \
