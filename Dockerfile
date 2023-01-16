@@ -1,9 +1,11 @@
-FROM ubuntu:focal-20220531 as bare-Neovim
+FROM ubuntu:focal-20220531 as bare-neovim
 WORKDIR /root/
 RUN apt-get update  && apt-get install -y \
     wget \
+    curl \
     locales \
-    git && \
+    git \
+    unzip && \
     sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen && \
     wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb && \
     apt-get install ./nvim-linux64.deb && \
