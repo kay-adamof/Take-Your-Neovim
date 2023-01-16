@@ -38,6 +38,9 @@ COPY --from=node /usr/local/bin/ /usr/local/bin/
 COPY --from=python /usr/local/include/ /usr/local/include/
 COPY --from=python /usr/local/lib/ /usr/local/lib/
 COPY --from=python /usr/local/bin/ /usr/local/bin/
+COPY --from=lua /usr/local/include/ /usr/local/include/
+COPY --from=lua /usr/local/lib/ /usr/local/lib/
+COPY --from=lua /usr/local/bin/ /usr/local/bin/
 WORKDIR /root/
 # To activate python
 # See: https://stackoverflow.com/questions/43333207/python-error-while-loading-shared-libraries-libpython3-4m-so-1-0-cannot-open
