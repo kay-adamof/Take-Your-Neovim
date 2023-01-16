@@ -1,6 +1,24 @@
+FROM ubuntu:focal-20220531 as bare-Neovim
+WORKDIR /root/
+RUN apt-get update  && apt-get install -y \
+    wget \
+    locales \
+    git && \
+    sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen && \
+    wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb && \
+    apt-get install ./nvim-linux64.deb && \
+    rm -rf /var/lib/apt/lists/*
+# After installing Neovim, `:checkhealth` shows an error about system locale.
+# To fix this, I follow instructions in the link below.
+# 'https://stackoverflow.com/questions/28405902/how-to-set-the-locale-inside-a-debian-ubuntu-docker-container'
+ENV ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8
+
 # Using multi-stage build to specify minor/patch version of programing languages
 FROM node:18.3.0-slim as node
 FROM python:3.10.9-slim AS python
+
 # Using ubuntu as base image
 FROM ubuntu:focal-20220531 as base
 # Copy minimal runtime needed
