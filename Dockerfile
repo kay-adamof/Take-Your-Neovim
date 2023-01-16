@@ -18,6 +18,14 @@ ENV LC_ALL en_US.UTF-8
 # Using multi-stage build to specify minor/patch version of programing languages
 FROM node:18.3.0-slim as node
 FROM python:3.10.9-slim AS python
+FROM ubuntu:focal-20220531 as lua
+RUN apt-get update && apt-get install -y wget build-essential && \
+    wget https://www.lua.org/ftp/lua-5.4.4.tar.gz && \
+    tar -xf lua-5.4.4.tar.gz && \
+    cd lua-5.4.4 && \
+    make linux && \
+    make install && \
+    rm -rf /var/lib/apt/lists/*
 
 # Using ubuntu as base image
 FROM bare-neovim as neovim
