@@ -50,8 +50,7 @@ ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 FROM neovim as requirements-of-astro
 # Installing the requirements of AstroNvim
 # See: https://astronvim.github.io/#-requirements
-RUN apt-get install -y unzip && \
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip && \
+RUN wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip && \
     unzip Hack.zip && rm -rf Hack.zip && \
     npm install tree-sitter-cli && \
     wget https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb && \
