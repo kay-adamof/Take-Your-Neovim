@@ -71,7 +71,8 @@ RUN wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.z
 FROM requirements-of-astro as astro
 RUN git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim && \
     nvim --headless -c 'autocmd User PackerComplete quitall' && \
-    nvim --headless -c 'TSUpdateSync lua vim' -c 'qa'
+    nvim --headless -c 'TSUpdateSync lua vim' -c 'qa' && \
+    cp -r ~/.config/nvim/lua/user_example/ ~/.config/nvim/lua/user/
 ENV ENV LANG en_US.UTF-8  
 ENV LANGUAGE en_US:en  
 ENV LC_ALL en_US.UTF-8
