@@ -42,6 +42,8 @@ COPY --from=lua /usr/local/include/ /usr/local/include/
 COPY --from=lua /usr/local/lib/ /usr/local/lib/
 COPY --from=lua /usr/local/bin/ /usr/local/bin/
 WORKDIR /root/
+RUN apt-get update && apt-get install -y build-essential && \
+    rm -rf /var/lib/apt/lists/*
 # To activate python
 # See: https://stackoverflow.com/questions/43333207/python-error-while-loading-shared-libraries-libpython3-4m-so-1-0-cannot-open
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
