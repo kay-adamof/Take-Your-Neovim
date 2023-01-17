@@ -9,6 +9,7 @@ RUN apt-get update  && apt-get install -y \
     sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen && \
     wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb && \
     apt-get install ./nvim-linux64.deb && \
+    rm -rf nvim-linux64.deb && \
     rm -rf /var/lib/apt/lists/*
 # After installing Neovim, `:checkhealth` shows an error about system locale.
 # To fix this, I follow instructions in the link below.
@@ -60,11 +61,13 @@ RUN wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.z
     LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/') && \
     curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" && \
     tar xf lazygit.tar.gz -C /usr/local/bin lazygit && \
+    rm -rf lazygit.tar.gz && \
     curl -L https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd64.tgz | tar xz && \
     chmod +x gdu_linux_amd64 && \
     mv gdu_linux_amd64 /usr/bin/gdu && \
     curl -LO https://github.com/ClementTsang/bottom/releases/download/0.7.1/bottom_0.7.1_amd64.deb && \
     dpkg -i bottom_0.7.1_amd64.deb && \
+    rm -rf bottom_0.7.1_amd64.deb && \
     rm -rf /var/lib/apt/lists/*
 
 # About 140sec is needed to build this image in the case of my machine.
