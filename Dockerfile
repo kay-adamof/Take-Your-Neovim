@@ -69,7 +69,7 @@ RUN wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.z
 
 # About 140sec is needed to build this image in the case of my machine.
 FROM requirements-of-astro as astro
-RUN git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim && nvim --headless -c 'autocmd User PackerComplete TSUpdate lua vim quitall'
+RUN git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim && nvim --headless -c 'autocmd User PackerComplete quitall'
 ENV ENV LANG en_US.UTF-8  
 ENV LANGUAGE en_US:en  
 ENV LC_ALL en_US.UTF-8
