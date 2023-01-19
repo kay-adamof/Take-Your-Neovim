@@ -80,3 +80,19 @@ RUN git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim && \
 ENV ENV LANG en_US.UTF-8  
 ENV LANGUAGE en_US:en  
 ENV LC_ALL en_US.UTF-8
+
+FROM neovim AS lvim
+COPY --from=rust /usr/local/cargo /usr/local/cargo
+COPY --from=rust /usr/local/rustup /usr/local/rustup
+ENV CARGO_HOME=/usr/local/cargo
+ENV RUSTUP_HOME=/usr/local/rustup
+ENV PATH=/root/.local/bin:/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+RUN apt-get update && \ 
+    apt-get install -y wget build-essential && \
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip && \
+    unzip Hack.zip && rm -rf Hack.zip && \
+    wget -O lvim.tar.gz https://github.com/LunarVim/LunarVim/archive/refs/tags/1.2.0.tar.gz && \
+    tar -xf lvim.tar.gz && \
+    cd "$(tar -tf lvim.tar.gz | head -1)" && \
+    make install && \
+    rm -rf /var/lib/apt/lists/*
