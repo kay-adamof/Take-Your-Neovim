@@ -5,6 +5,7 @@ This single Dockerfile is intended not only to validate the Neovim configuration
 ## Usage
 
 ### Astro
+
 `docker build --target astro --tag your.favorite.image.name .`
 `docker run --rm --name your.favorite.container.name -it astro nvim .
 
