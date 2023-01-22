@@ -1,6 +1,6 @@
 # Take Your Neovim
 
-This single Dockerfile is intended not only to validate the Neovim configuration without hassle, but also to allow you to try out the community-based Neovim bundle.
+This single Dockerfile is intended not only to validate the Neovim configuration without hassle, but also to allow you to try out the community-based Neovim bundlers.
 
 ## Usage
 
