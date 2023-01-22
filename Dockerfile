@@ -1,11 +1,7 @@
-FROM ubuntu:focal-20220531 as bare-neovim
+ARG VARIANT="bookworm"
+FROM buildpack-deps:${VARIANT} AS bare-neovim
 WORKDIR /root/
-RUN apt-get update  && apt-get install -y \
-    wget \
-    curl \
-    locales \
-    git \
-    unzip && \
+RUN apt-get update  && apt-get install -y locales && \
     sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen && \
     wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb && \
     apt-get install ./nvim-linux64.deb && \
@@ -14,8 +10,8 @@ RUN apt-get update  && apt-get install -y \
 # After installing Neovim, `:checkhealth` shows an error about system locale.
 # To fix this, I follow instructions in the link below.
 # 'https://stackoverflow.com/questions/28405902/how-to-set-the-locale-inside-a-debian-ubuntu-docker-container'
-ENV ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
+ENV ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Using multi-stage build to specify minor/patch version of programing languages
@@ -50,7 +46,7 @@ RUN apt-get update && apt-get install -y build-essential && \
 # See: https://stackoverflow.com/questions/43333207/python-error-while-loading-shared-libraries-libpython3-4m-so-1-0-cannot-open
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
-# https://astronvim.github.io/ 
+# https://astronvim.github.io/
 FROM neovim as requirements-of-astro
 # Installing the requirements of AstroNvim
 # See: https://astronvim.github.io/#-requirements
@@ -77,8 +73,8 @@ RUN git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim && \
     nvim --headless -c 'autocmd User PackerComplete quitall' && \
     nvim --headless -c 'TSUpdateSync lua vim' -c 'qa' && \
     cp -r ~/.config/nvim/lua/user_example/ ~/.config/nvim/lua/user/
-ENV ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
+ENV ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 FROM neovim AS lvim
