@@ -13,6 +13,7 @@ This single Dockerfile is intended not only to validate the Neovim configuration
 
 
 1. Create a folder in your directory
+1. Go to the folder created
 1. Run this commands on your terminal
 1. 
 
