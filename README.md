@@ -12,7 +12,12 @@ This single Dockerfile is intended not only to validate the Neovim configuration
 `AstroNvim` is my favorite and main Neovim bundlers.Please follow these steps to use AstroNvim.
 
 
-1. Create a folder in your directory
+1. Create a folder to your prefered directory on your terminal.
+
+    ```
+    mkdir $HOME/path/to/neovim`
+    ```
+
 1. Go to the folder created
 1. Run this commands on your terminal
 1. 
