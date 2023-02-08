@@ -23,7 +23,8 @@ This single Dockerfile is intended not only to validate the Neovim configuration
 1.
 
 `docker build --target astro --tag your.favorite.image.name .`
-`docker run --rm --name your.favorite.container.name -it astro nvim .
+
+`docker run --rm --name your.favorite.container.name -it astro nvim .`
 
 - If you don't have `Docker` on your own machine or just discourage to use my Dockerfile on your local dev environment, try the `GitHub Codespaces` to know how it works.
 
