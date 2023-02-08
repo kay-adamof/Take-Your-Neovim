@@ -20,7 +20,7 @@ This single Dockerfile is intended not only to validate the Neovim configuration
 
 1. Go to the folder created
 1. Run this commands on your terminal
-1. 
+1.
 
 `docker build --target astro --tag your.favorite.image.name .`
 `docker run --rm --name your.favorite.container.name -it astro nvim .
